@@ -4,6 +4,7 @@ import React, { useState } from "react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,9 +13,15 @@ const Login = () => {
         "http://localhost:5000/api/auth/login",
         { email, password }
       );
-      console.log(response);
+      if (response.data.success) {
+        alert("Login Successful");
+      }
     } catch (error) {
-      console.log(error);
+      if (error.response && !error.response.data.success) {
+        setError(error.response.data.error);
+      } else {
+        setError("Server Error");
+      }
     }
   };
 
@@ -28,6 +35,7 @@ const Login = () => {
       <h2 className="font-play text-4xl text-white">Leave App</h2>
       <div className="border shadow-lg p-6 w-80 bg-white rounded-lg">
         <h2 className="font-roboto text-2xl font-bold mb-4">Login</h2>
+        {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -41,6 +49,7 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-violet-500"
               placeholder="Enter Email"
               onChange={(e) => setEmail(e.target.value)}
+              required
             ></input>
           </div>
           <div className="mb-4">
@@ -55,6 +64,7 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-violet-500"
               placeholder="******"
               onChange={(e) => setPassword(e.target.value)}
+              required
             ></input>
           </div>
           <div className="mb-4 flex items-center justify-between text-sm">
