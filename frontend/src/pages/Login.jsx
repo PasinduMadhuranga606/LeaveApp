@@ -20,6 +20,7 @@ const Login = () => {
       if (response.data.success) {
         // alert("Login Successful");
         login(response.data.user);
+        console.log(response.data.user);
         localStorage.setItem("token", response.data.token);
         if (response.data.user.role === "admin") {
           navigate("/admin-dashboard");
