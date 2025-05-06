@@ -1,11 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        { email, password }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -15,7 +25,7 @@ const Login = () => {
         background: "linear-gradient(to bottom, #7C3AED 50%, #f3f4f6 50%)",
       }}
     >
-      <h2 className="font-play text-3xl text-white">Leave App</h2>
+      <h2 className="font-play text-4xl text-white">Leave App</h2>
       <div className="border shadow-lg p-6 w-80 bg-white rounded-lg">
         <h2 className="font-roboto text-2xl font-bold mb-4">Login</h2>
         <form onSubmit={handleSubmit}>
