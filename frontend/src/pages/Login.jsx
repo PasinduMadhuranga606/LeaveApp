@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div
       className="flex flex-col items-center justify-center h-screen space-y-6"
@@ -11,7 +18,7 @@ const Login = () => {
       <h2 className="font-play text-3xl text-white">Leave App</h2>
       <div className="border shadow-lg p-6 w-80 bg-white rounded-lg">
         <h2 className="font-roboto text-2xl font-bold mb-4">Login</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -23,6 +30,7 @@ const Login = () => {
               type="email"
               className="w-full px-3 py-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-violet-500"
               placeholder="Enter Email"
+              onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>
           <div className="mb-4">
@@ -36,6 +44,7 @@ const Login = () => {
               type="password"
               className="w-full px-3 py-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-violet-500"
               placeholder="******"
+              onChange={(e) => setPassword(e.target.value)}
             ></input>
           </div>
           <div className="mb-4 flex items-center justify-between text-sm">
