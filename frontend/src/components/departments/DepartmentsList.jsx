@@ -18,7 +18,7 @@ const DepartmentsList = () => {
         />
         <Link
           to="/admin-dashboard/add-department"
-          className="px-6 py-1.5 rounded-md border text-white border-black bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
+          className="px-6 py-1.5 rounded-md text-white border border-black bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
         >
           Add New Department
         </Link>
