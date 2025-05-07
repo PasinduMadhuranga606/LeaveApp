@@ -11,7 +11,7 @@ import {
 const AdminSidebar = () => {
   return (
     <div className="bg-violet-950 text-white h-screen fixed left-0 top-0 bottom-0 space-y-2 w-64">
-      <div className="bg-violet-500 h-12 flex items-center justify-center">
+      <div className="bg-violet-500 h-15 flex items-center justify-center">
         <h3 className="text-2xl text-center font-play">Leave App</h3>
       </div>
       <div>
