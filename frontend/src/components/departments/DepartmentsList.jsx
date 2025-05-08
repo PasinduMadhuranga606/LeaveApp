@@ -22,11 +22,12 @@ const DepartmentsList = () => {
         );
         if (response.data.success) {
           let sno = 1;
+          //console.log(response.data);
           const data = await response.data.departments.map((dep) => ({
             _id: dep._id,
             sno: sno++,
             dep_name: dep.dep_name,
-            action: <DepartmentButtons />,
+            action: <DepartmentButtons _id={dep._id} />,
           }));
           setDepartments(data);
         }
