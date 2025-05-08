@@ -7,6 +7,7 @@ import axios from "axios";
 const DepartmentsList = () => {
   const [departments, setDepartments] = useState([]);
   const [depLoading, setDepLoading] = useState(false);
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
 
   const onDepartmentDelete = async (id) => {
     const data = departments.filter((dep) => dep._id !== id);
@@ -40,6 +41,7 @@ const DepartmentsList = () => {
             ),
           }));
           setDepartments(data);
+          setFilteredDepartments(data);
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {
@@ -52,6 +54,13 @@ const DepartmentsList = () => {
 
     fetchDepartments();
   }, []);
+
+  const filterDepartments = (e) => {
+    const records = departments.filter((dep) =>
+      dep.dep_name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredDepartments(records);
+  };
 
   return (
     <>
@@ -67,9 +76,10 @@ const DepartmentsList = () => {
           <div className="flex justify-between items-center">
             <input
               type="text"
-              placeholder="Search Department Name"
+              placeholder="Search By Depart. Name"
               className="px-4 py-0.5 rounded-md border border-black bg-white"
               //className="px-4 py-0.5 border"
+              onChange={filterDepartments}
             />
             <Link
               to="/admin-dashboard/add-department"
@@ -79,7 +89,7 @@ const DepartmentsList = () => {
             </Link>
           </div>
           <div className="mt-5">
-            <DataTable columns={columns} data={departments} />
+            <DataTable columns={columns} data={filteredDepartments} />
           </div>
         </div>
       )}

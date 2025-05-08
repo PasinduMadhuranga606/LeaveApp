@@ -67,7 +67,7 @@ const EditDepartment = () => {
   return (
     <>
       {depLoading ? (
-        <div>LOADING1234</div>
+        <div>Loading......</div>
       ) : (
         <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-96">
           <h3 className="text-2xl font-semibold mb-6">Edit Department</h3>
