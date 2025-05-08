@@ -15,9 +15,13 @@ export const columns = [
 
 export const DepartmentButtons = () => {
   return (
-    <div>
-      <button>Edit</button>
-      <button>Delete</button>
+    <div className="flex space-x-3">
+      <button className="px-3 py-1 rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-200">
+        Edit
+      </button>
+      <button className="px-3 py-1 rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+        Delete
+      </button>
     </div>
   );
 };
