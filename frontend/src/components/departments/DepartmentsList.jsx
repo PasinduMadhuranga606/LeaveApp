@@ -89,7 +89,11 @@ const DepartmentsList = () => {
             </Link>
           </div>
           <div className="mt-5">
-            <DataTable columns={columns} data={filteredDepartments} />
+            <DataTable
+              columns={columns}
+              data={filteredDepartments}
+              pagination
+            />
           </div>
         </div>
       )}
