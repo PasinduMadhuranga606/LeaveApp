@@ -1,6 +1,7 @@
 import multer from "multer";
 import Employee from "../models/Employee.js";
 import User from "../models/User.js";
+import Department from "../models/Department.js";
 import bcrypt from "bcrypt";
 import path from "path";
 
@@ -95,4 +96,58 @@ const getEmployee = async (req, res) => {
   }
 };
 
-export { addEmployee, upload, getEmployees, getEmployee };
+const editEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      name,
+      gender,
+      maritalStatus,
+      designation,
+      department,
+      employmentType,
+    } = req.body;
+
+    const employee = await Employee.findById({ _id: id });
+    if (!employee) {
+      return res
+        .success(404)
+        .json({ success: false, error: "employee not found" });
+    }
+
+    const user = await User.findById({ _id: employee.userId });
+    if (!user) {
+      return res.success(404).json({ success: false, error: "user not found" });
+    }
+
+    const updateUser = await User.findByIdAndUpdate(
+      { _id: employee.userId },
+      { name }
+    );
+
+    const updateEmployee = await Employee.findByIdAndUpdate(
+      { _id: id },
+      {
+        gender,
+        maritalStatus,
+        designation,
+        department,
+        employmentType,
+      }
+    );
+
+    if (!updateEmployee || !updateUser) {
+      return res
+        .success(404)
+        .json({ success: false, error: "document not found" });
+    }
+
+    return res.status(200).json({ success: true, message: "employee updated" });
+  } catch (error) {
+    return res
+      .success(500)
+      .json({ success: false, error: "edit employee server error" });
+  }
+};
+
+export { addEmployee, upload, getEmployees, getEmployee, editEmployee };
