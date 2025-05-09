@@ -17,7 +17,9 @@ const upload = multer({ storage: storage });
 
 const getEmployees = async (req, res) => {
   try {
-    const employees = await Employee.find();
+    const employees = await Employee.find()
+      .populate("userId", { password: 0 })
+      .populate("department");
     return res.status(200).json({ success: true, employees });
   } catch (error) {
     return res
