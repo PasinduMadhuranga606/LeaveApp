@@ -56,6 +56,13 @@ const EmployeesList = () => {
     fetchEmployees();
   }, []);
 
+  const filterEmployees = (e) => {
+    const records = employees.filter((emp) =>
+      emp.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredEmployees(records);
+  };
+
   return (
     <div className="p-5">
       <div className="text-center">
@@ -64,10 +71,10 @@ const EmployeesList = () => {
       <div className="flex justify-between items-center">
         <input
           type="text"
-          placeholder="Search By Employee Id"
+          placeholder="Search By Emp. Name"
           className="px-4 py-0.5 rounded-md border border-black bg-white"
           //className="px-4 py-0.5 border"
-          //onChange={filterDepartments}
+          onChange={filterEmployees}
         />
         <Link
           to="/admin-dashboard/add-employee"
@@ -77,8 +84,7 @@ const EmployeesList = () => {
         </Link>
       </div>
       <div className="mt-5">
-        {/* <DataTable columns={columns} data={filteredDepartments} pagination /> */}
-        <DataTable columns={columns} data={employees} />
+        <DataTable columns={columns} data={filteredEmployees} pagination />
       </div>
     </div>
   );

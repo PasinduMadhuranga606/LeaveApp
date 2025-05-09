@@ -26,6 +26,7 @@ export const columns = [
   {
     name: "Department",
     selector: (row) => row.dep_name,
+    sortable: true,
     width: "200px",
   },
   {
