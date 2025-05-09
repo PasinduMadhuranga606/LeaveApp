@@ -85,7 +85,7 @@ export const EmployeeButtons = ({ _id, onDepartmentDelete }) => {
     <div className="flex space-x-3">
       <button
         className="px-3 py-1 rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200"
-        //onClick={() => navigate(`/admin-dashboard/departments/${_id}`)}
+        onClick={() => navigate(`/admin-dashboard/employees/${_id}`)}
       >
         View
       </button>
