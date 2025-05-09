@@ -6,6 +6,7 @@ import {
   FaCogs,
   FaTachometerAlt,
   FaUsers,
+  FaUserTie,
 } from "react-icons/fa";
 import { useAuth } from "../../context/authContext";
 
@@ -46,7 +47,7 @@ const EmployeeSidebar = () => {
               } flex items-center space-x-5 block px-3 py-2.5 rounded-md hover:bg-violet-700 transition-colors duration-200`
             }
           >
-            <FaUsers />
+            <FaUserTie />
             <span>My Profile</span>
           </NavLink>
         </div>
@@ -65,7 +66,7 @@ const EmployeeSidebar = () => {
               } flex items-center space-x-5 block px-3 py-2.5 rounded-md hover:bg-violet-700 transition-colors duration-200`
             }
           >
-            <FaBuilding />
+            <FaCalendarAlt />
             <span>Leaves</span>
           </NavLink>
         </div>
