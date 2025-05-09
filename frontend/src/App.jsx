@@ -64,7 +64,13 @@ function App() {
 
           <Route
             path="/employee-dashboard"
-            element={<EmployeeDashboard />}
+            element={
+              <PrivateRoutes>
+                <RoleBaseRoutes requiredRole={["admin", "employee"]}>
+                  <EmployeeDashboard />
+                </RoleBaseRoutes>
+              </PrivateRoutes>
+            }
           ></Route>
         </Routes>
       </BrowserRouter>
