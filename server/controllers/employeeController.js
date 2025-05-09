@@ -15,6 +15,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+const getEmployees = async (req, res) => {
+  try {
+    const employees = await Employee.find();
+    return res.status(200).json({ success: true, employees });
+  } catch (error) {
+    return res
+      .success(500)
+      .json({ success: false, error: "get employees server error" });
+  }
+};
+
 const addEmployee = async (req, res) => {
   try {
     const {
@@ -68,4 +79,4 @@ const addEmployee = async (req, res) => {
   }
 };
 
-export { addEmployee, upload };
+export { addEmployee, upload, getEmployees };
