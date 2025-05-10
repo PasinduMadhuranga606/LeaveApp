@@ -1,8 +1,39 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 const LeaveList = () => {
+  const { user } = useAuth();
+  const [leaves, setLeaves] = useState([]);
+  let sno = 1;
+
+  useEffect(() => {
+    const fetchLeaves = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/leave/${user._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        //console.log(response.data);
+        if (response.data.success) {
+          setLeaves(response.data.leaves);
+        }
+      } catch (error) {
+        if (error.response && !error.response.data.success) {
+          alert(error.response.data.error);
+        }
+      }
+    };
+
+    fetchLeaves();
+  }, []);
+
   return (
     <div className="p-5">
       <div className="text-center">
@@ -11,7 +42,7 @@ const LeaveList = () => {
       <div className="flex justify-between items-center">
         <input
           type="text"
-          placeholder="Search By Leave Name"
+          placeholder="Search By Leave Type"
           className="px-4 py-0.5 rounded-md border border-black bg-white"
           //className="px-4 py-0.5 border"
           //onChange={filterEmployees}
@@ -23,8 +54,45 @@ const LeaveList = () => {
           Add New Leave
         </Link>
       </div>
+
       <div className="mt-5">
-        {/* <DataTable columns={columns} data={filteredEmployees} pagination /> */}
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 titlecase bg-gray-50 border border-gray-200">
+            <tr>
+              <th className="px-6 py-3">S No</th>
+              <th className="px-6 py-3">Leave Type</th>
+              <th className="px-6 py-3">Leave Duration</th>
+              <th className="px-6 py-3">From</th>
+              <th className="px-6 py-3">To</th>
+              <th className="px-6 py-3">Description</th>
+              <th className="px-6 py-3">Applied Date</th>
+              <th className="px-6 py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaves.map((leave) => (
+              <tr
+                key={leave._id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              >
+                <td className="px-6 py-3">{sno++}</td>
+                <td className="px-6 py-3">{leave.leaveType}</td>
+                <td className="px-6 py-3">{leave.leaveDuration}</td>
+                <td className="px-6 py-3">
+                  {new Date(leave.fromDate).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-3">
+                  {new Date(leave.toDate).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-3">{leave.description}</td>
+                <td className="px-6 py-3">
+                  {new Date(leave.createdAt).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-3">{leave.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
