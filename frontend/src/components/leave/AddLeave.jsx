@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "../../context/authContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddLeave = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [leave, setLeave] = useState({
+    userId: user._id,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLeave((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // const formDataObj = new FormData();
+    // Object.keys(formData).forEach((key) => {
+    //   formDataObj.append(key, formData[key]);
+    // });
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/leave/add", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.data.success) {
+        navigate("/employee-dashboard/leaves");
+      }
+    } catch (error) {
+      if (error.response && !error.response.data.success) {
+        alert(error.response.data.error);
+      }
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
       <h3 className="text-2xl font-semibold mb-6">Request for Leave</h3>
-      {/* <form onSubmit={handleSubmit}> */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label
@@ -16,7 +54,7 @@ const AddLeave = () => {
             </label>
             <select
               name="leaveType"
-              //   onChange={handleChange}
+              onChange={handleChange}
               className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
               required
             >
@@ -37,7 +75,7 @@ const AddLeave = () => {
             </label>
             <select
               name="leaveDuration"
-              //   onChange={handleChange}
+              onChange={handleChange}
               className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
               required
             >
@@ -58,7 +96,7 @@ const AddLeave = () => {
             <input
               type="date"
               name="fromDate"
-              //   onChange={handleChange}
+              onChange={handleChange}
               placeholder="From Date"
               className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
               required
@@ -75,7 +113,7 @@ const AddLeave = () => {
             <input
               type="date"
               name="toDate"
-              //   onChange={handleChange}
+              onChange={handleChange}
               placeholder="To Date"
               className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
               required
@@ -92,7 +130,7 @@ const AddLeave = () => {
           </label>
           <textarea
             name="description"
-            //onChange={handleChange}
+            onChange={handleChange}
             placeholder="Description"
             className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
             rows="4"
