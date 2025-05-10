@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ViewLeave = () => {
   const { id } = useParams();
   const [leave, setLeave] = useState(null);
   //const [empLoading, setEmpLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLeave = async () => {
@@ -31,6 +32,28 @@ const ViewLeave = () => {
 
     fetchLeave();
   }, []);
+
+  const changeStatus = async (id, status) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/leave/${id}`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      //console.log(response.data);
+      if (response.data.success) {
+        navigate("/admin-dashboard/leaves");
+      }
+    } catch (error) {
+      if (error.response && !error.response.data.success) {
+        alert(error.response.data.error);
+      }
+    }
+  };
 
   return (
     <>
@@ -98,14 +121,20 @@ const ViewLeave = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">
-                  {leave.status === "Pending" ? "Action:" : "Status"}
+                  {leave.status === "Pending" ? "Action:" : "Status:"}
                 </p>
                 {leave.status === "Pending" ? (
                   <div className="flex space-x-2">
-                    <button className="px-3 py-1 rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-200">
+                    <button
+                      className="px-3 py-1 rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-200"
+                      onClick={() => changeStatus(leave._id, "Approved")}
+                    >
                       Approve
                     </button>
-                    <button className="px-3 py-1 rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+                    <button
+                      className="px-3 py-1 rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200"
+                      onClick={() => changeStatus(leave._id, "Rejected")}
+                    >
                       Reject
                     </button>
                   </div>
