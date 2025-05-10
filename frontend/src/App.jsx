@@ -17,6 +17,7 @@ import LeaveList from "./components/leave/LeaveList";
 import AddLeave from "./components/leave/AddLeave";
 import Settings from "./components/dashboard/Settings";
 import LeaveListAdmin from "./components/leave/LeaveListAdmin";
+import ViewLeave from "./components/leave/ViewLeave";
 
 function App() {
   return (
@@ -68,6 +69,10 @@ function App() {
             <Route
               path="/admin-dashboard/leaves"
               element={<LeaveListAdmin />}
+            ></Route>
+            <Route
+              path="/admin-dashboard/leaves/view/:id"
+              element={<ViewLeave />}
             ></Route>
           </Route>
 
