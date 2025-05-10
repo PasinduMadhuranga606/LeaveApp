@@ -101,9 +101,13 @@ const ViewLeave = () => {
                   {leave.status === "Pending" ? "Action:" : "Status"}
                 </p>
                 {leave.status === "Pending" ? (
-                  <div>
-                    <button>Approve</button>
-                    <button>Reject</button>
+                  <div className="flex space-x-2">
+                    <button className="px-3 py-1 rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-200">
+                      Approve
+                    </button>
+                    <button className="px-3 py-1 rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+                      Reject
+                    </button>
                   </div>
                 ) : (
                   <p className="text-lg font-normal">{leave.status}</p>
