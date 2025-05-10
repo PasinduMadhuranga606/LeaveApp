@@ -73,8 +73,17 @@ const EmployeeSidebar = () => {
 
         <div className="pl-4 pr-4">
           <NavLink
-            to="/employee-dashboard"
-            className="flex items-center space-x-5 block py-2.5 px-4 rounded"
+            to="/employee-dashboard/settings"
+            // className={({ isActive }) =>
+            //   `flex items-center space-x-5 px-3 py-2.5 rounded-md transition-colors duration-200 ${
+            //     isActive ? "bg-violet-700" : "hover:bg-violet-800"
+            //   }`
+            // }
+            className={({ isActive }) =>
+              `${
+                isActive ? "bg-violet-600 " : " "
+              } flex items-center space-x-5 block px-3 py-2.5 rounded-md hover:bg-violet-700 transition-colors duration-200`
+            }
           >
             <FaCogs />
             <span>Settings</span>
