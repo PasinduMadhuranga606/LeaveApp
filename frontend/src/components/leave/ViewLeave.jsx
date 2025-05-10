@@ -74,7 +74,7 @@ const ViewLeave = () => {
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Name:</p>
                 <p className="text-lg font-normal">
-                  {leave.employeeId.userId.name}
+                  {leave.employeeId.userId.name || "N/A"}
                 </p>
               </div>
               <div className="flex space-x-3 mb-5">
