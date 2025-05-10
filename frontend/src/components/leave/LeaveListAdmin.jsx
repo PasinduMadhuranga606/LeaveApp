@@ -1,7 +1,55 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { LeaveButtons } from "../../utils/LeaveHelper";
+import DataTable from "react-data-table-component";
+import { columns } from "../../utils/LeaveHelper";
 
 const LeaveListAdmin = () => {
+  const [leaves, setLeaves] = useState(null);
+
+  useEffect(() => {
+    const fetchLeaves = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/leaves", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.data.success) {
+          let sno = 1;
+          //console.log(response.data);
+          const data = await response.data.leaves.map((leave) => ({
+            _id: leave._id,
+            sno: sno++,
+            employeeId: leave.employeeId.employeeId,
+            name: leave.employeeId.userId.name,
+            leaveType: leave.leaveType,
+            leaveDuration: leave.leaveDuration,
+            department: leave.employeeId.department.name,
+            days:
+              new Date(leave.toDate).getDate() -
+              new Date(leave.fromDate).getDate(),
+            status: leave.status,
+            action: (
+              <LeaveButtons
+                Id={leave._id}
+                //onDepartmentDelete={onDepartmentDelete}
+              />
+            ),
+          }));
+          setLeaves(data);
+        }
+      } catch (error) {
+        if (error.response && !error.response.data.success) {
+          alert(error.response.data.error);
+        }
+      }
+    };
+
+    fetchLeaves();
+  }, []);
+
   return (
     <div className="p-5">
       <div className="text-center">
@@ -27,6 +75,7 @@ const LeaveListAdmin = () => {
           </button>
         </div>
       </div>
+      <DataTable columns={columns} data={leaves} pagination />
     </div>
   );
 };
