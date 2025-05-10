@@ -1,7 +1,111 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const ViewLeave = () => {
-  return <div>ViewLeave</div>;
+  const { id } = useParams();
+  const [leave, setLeave] = useState(null);
+  //const [empLoading, setEmpLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchLeave = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/leave/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        //console.log(response.data);
+        if (response.data.success) {
+          setLeave(response.data.leave);
+        }
+      } catch (error) {
+        if (error.response && !error.response.data.success) {
+          alert(error.response.data.error);
+        }
+      }
+    };
+
+    fetchLeave();
+  }, []);
+
+  return (
+    <>
+      {leave ? (
+        <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
+          <h3 className="text-3xl font-semibold mb-12 text-center">
+            Leave Details
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <img
+                src={`http://localhost:5000/${leave.employeeId.userId.profileImage}`}
+                className="rounded-full border w-72"
+              />
+            </div>
+
+            <div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Name:</p>
+                <p className="text-lg font-normal">
+                  {leave.employeeId.userId.name}
+                </p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Employee ID:</p>
+                <p className="text-lg font-normal">
+                  {leave.employeeId.employeeId}
+                </p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Leave Type:</p>
+                <p className="text-lg font-normal">{leave.leaveType}</p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Leave Duration:</p>
+                <p className="text-lg font-normal">{leave.leaveDuration}</p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Description:</p>
+                <p className="text-lg font-normal">{leave.description}</p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Department:</p>
+                <p className="text-lg font-normal">
+                  {leave.employeeId.department.dep_name}
+                </p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Employment Type:</p>
+                <p className="text-lg font-normal">{leave.employmentType}</p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Start Date:</p>
+                <p className="text-lg font-normal">
+                  {new Date(leave.fromDate).toLocaleDateString()}
+                </p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">End Date:</p>
+                <p className="text-lg font-normal">
+                  {new Date(leave.toDate).toLocaleDateString()}
+                </p>
+              </div>
+              <div className="flex space-x-3 mb-5">
+                <p className="text-lg font-semibold">Status:</p>
+                <p className="text-lg font-normal">{leave.status}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>Loading......</div>
+      )}
+    </>
+  );
 };
 
 export default ViewLeave;
