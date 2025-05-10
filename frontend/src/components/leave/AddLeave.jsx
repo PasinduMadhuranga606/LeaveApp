@@ -25,11 +25,15 @@ const AddLeave = () => {
     // });
 
     try {
-      const response = await axios.post("http://localhost:5000/api/leave/add", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/leave/add",
+        leave,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       if (response.data.success) {
         navigate("/employee-dashboard/leaves");
       }
