@@ -5,12 +5,12 @@ export const columns = [
   {
     name: "S No",
     selector: (row) => row.sno,
-    width: "100px",
+    width: "70px",
   },
   {
     name: "Emp ID",
     selector: (row) => row.employeeId,
-    width: "150px",
+    width: "160px",
   },
   {
     name: "Name",
@@ -22,31 +22,31 @@ export const columns = [
     name: "Leave Type",
     selector: (row) => row.leaveType,
     sortable: true,
-    width: "200px",
+    width: "130px",
   },
   {
     name: "Leave Duration",
     selector: (row) => row.leaveDuration,
     sortable: true,
-    width: "200px",
+    width: "160px",
   },
   {
     name: "Department",
     selector: (row) => row.department,
     sortable: true,
-    width: "200px",
+    width: "120px",
   },
   {
     name: "Days",
     selector: (row) => row.days,
     sortable: true,
-    width: "200px",
+    width: "100px",
   },
   {
     name: "Status",
     selector: (row) => row.status,
     sortable: true,
-    width: "200px",
+    width: "100px",
   },
   {
     name: "Action",
