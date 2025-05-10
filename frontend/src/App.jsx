@@ -13,6 +13,7 @@ import AddEmployee from "./components/employee/AddEmployee";
 import ViewEmployee from "./components/employee/ViewEmployee";
 import EditEmployee from "./components/employee/EditEmployee";
 import EmployeeSummary from "./components/dashboard/EmployeeSummary";
+import LeaveList from "./components/leave/LeaveList";
 
 function App() {
   return (
@@ -77,6 +78,10 @@ function App() {
             <Route
               path="/employee-dashboard/my-profile/:id"
               element={<ViewEmployee />}
+            ></Route>
+            <Route
+              path="/employee-dashboard/leaves"
+              element={<LeaveList />}
             ></Route>
           </Route>
         </Routes>
