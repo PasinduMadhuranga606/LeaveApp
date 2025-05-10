@@ -34,7 +34,7 @@ const getLeave = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ success: false, error: "get leaves server error" });
+      .json({ success: false, error: "get leave server error" });
   }
 };
 
@@ -61,4 +61,28 @@ const getLeaves = async (req, res) => {
   }
 };
 
-export { addLeave, getLeave, getLeaves };
+const viewLeave = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const leave = await Leave.findById({ _id: id }).populate({
+      path: "employeeId",
+      populate: [
+        {
+          path: "department",
+          select: "dep_name",
+        },
+        {
+          path: "userId",
+          select: "name, profileImage",
+        },
+      ],
+    });
+    return res.status(200).json({ success: true, leave });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, error: "view leave server error" });
+  }
+};
+
+export { addLeave, getLeave, getLeaves, viewLeave };

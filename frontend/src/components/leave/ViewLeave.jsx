@@ -11,7 +11,7 @@ const ViewLeave = () => {
     const fetchLeave = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/leave/${id}`,
+          `http://localhost:5000/api/leave/view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,7 +80,9 @@ const ViewLeave = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Employment Type:</p>
-                <p className="text-lg font-normal">{leave.employmentType}</p>
+                <p className="text-lg font-normal">
+                  {leave.employeeId.employmentType}
+                </p>
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Start Date:</p>
@@ -95,8 +97,17 @@ const ViewLeave = () => {
                 </p>
               </div>
               <div className="flex space-x-3 mb-5">
-                <p className="text-lg font-semibold">Status:</p>
-                <p className="text-lg font-normal">{leave.status}</p>
+                <p className="text-lg font-semibold">
+                  {leave.status === "Pending" ? "Action:" : "Status"}
+                </p>
+                {leave.status === "Pending" ? (
+                  <div>
+                    <button>Approve</button>
+                    <button>Reject</button>
+                  </div>
+                ) : (
+                  <p className="text-lg font-normal">{leave.status}</p>
+                )}
               </div>
             </div>
           </div>

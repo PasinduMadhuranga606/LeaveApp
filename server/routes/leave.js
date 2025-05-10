@@ -4,6 +4,7 @@ import {
   addLeave,
   getLeave,
   getLeaves,
+  viewLeave,
 } from "../controllers/leaveController.js";
 
 const router = express.Router();
@@ -11,6 +12,7 @@ const router = express.Router();
 router.get("/", authMiddleware, getLeaves);
 router.post("/add", authMiddleware, addLeave);
 router.get("/:id", authMiddleware, getLeave);
+router.get("/view/:id", authMiddleware, viewLeave);
 //router.put("/:id", authMiddleware, editDepartment);
 //router.delete("/:id", authMiddleware, deleteDepartment);
 
