@@ -54,7 +54,7 @@ const EmployeeSidebar = () => {
 
         <div className="pl-4 pr-4">
           <NavLink
-            to="/employee-dashboard/leaves"
+            to={`/employee-dashboard/leaves/${user._id}`}
             // className={({ isActive }) =>
             //   `flex items-center space-x-5 px-3 py-2.5 rounded-md transition-colors duration-200 ${
             //     isActive ? "bg-violet-700" : "hover:bg-violet-800"

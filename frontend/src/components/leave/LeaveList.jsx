@@ -1,19 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 
 const LeaveList = () => {
-  const { user } = useAuth();
-  const [leaves, setLeaves] = useState([]);
+  const [leaves, setLeaves] = useState(null);
+  const { id } = useParams();
   let sno = 1;
 
   useEffect(() => {
     const fetchLeaves = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/leave/${user._id}`,
+          `http://localhost:5000/api/leave/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -33,6 +33,10 @@ const LeaveList = () => {
 
     fetchLeaves();
   }, []);
+
+  if (!leaves) {
+    return <div>Loading......</div>;
+  }
 
   return (
     <div className="p-5">

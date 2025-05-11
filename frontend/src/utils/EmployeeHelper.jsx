@@ -98,16 +98,16 @@ export const EmployeeButtons = ({ _id, onDepartmentDelete }) => {
       </button>
       <button
         className="px-3 py-1 rounded-md text-white bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200"
-        //onClick={() => handleDelete(_id)}
+        onClick={() => navigate(`/admin-dashboard/employees/leaves/${_id}`)}
       >
         Leave
       </button>
-      <button
+      {/* <button
         className="px-3 py-1 rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200"
         //onClick={() => handleDelete(_id)}
       >
         Delete
-      </button>
+      </button> */}
     </div>
   );
 };
