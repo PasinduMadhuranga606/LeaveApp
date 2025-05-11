@@ -7,6 +7,7 @@ import { useAuth } from "../../context/authContext";
 const LeaveList = () => {
   const [leaves, setLeaves] = useState(null);
   const { id } = useParams();
+  const { user } = useAuth();
   let sno = 1;
 
   useEffect(() => {
@@ -51,12 +52,14 @@ const LeaveList = () => {
           //className="px-4 py-0.5 border"
           //onChange={filterEmployees}
         />
-        <Link
-          to="/employee-dashboard/add-leave"
-          className="px-6 py-1.5 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
-        >
-          Add New Leave
-        </Link>
+        {user.role === "employee" && (
+          <Link
+            to="/employee-dashboard/add-leave"
+            className="px-6 py-1.5 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
+          >
+            Add New Leave
+          </Link>
+        )}
       </div>
 
       <div className="mt-5">
