@@ -7,6 +7,7 @@ import { columns } from "../../utils/LeaveHelper";
 
 const LeaveListAdmin = () => {
   const [leaves, setLeaves] = useState(null);
+  const [filteredLeaves, setFilteredLeaves] = useState([]);
 
   useEffect(() => {
     const fetchLeaves = async () => {
@@ -39,6 +40,7 @@ const LeaveListAdmin = () => {
             ),
           }));
           setLeaves(data);
+          setFilteredLeaves(data);
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {
@@ -50,9 +52,23 @@ const LeaveListAdmin = () => {
     fetchLeaves();
   }, []);
 
+  const filterLeaves = (e) => {
+    const data = leaves.filter((leave) =>
+      leave.leaveType.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredLeaves(data);
+  };
+
+  const filterByButton = (status) => {
+    const data = leaves.filter((leave) =>
+      leave.status.toLowerCase().includes(status.toLowerCase())
+    );
+    setFilteredLeaves(data);
+  };
+
   return (
     <>
-      {leaves ? (
+      {filteredLeaves ? (
         <div className="p-5">
           <div className="text-center">
             <h3 className="text-3xl md:text-3xl font-semibold">
@@ -65,23 +81,32 @@ const LeaveListAdmin = () => {
               placeholder="Search By Leave Type"
               className="px-4 py-0.5 rounded-md border border-black bg-white"
               //className="px-4 py-0.5 border"
-              //onChange={filterEmployees}
+              onChange={filterLeaves}
             />
             <div className="space-x-3">
-              <button className="px-2 py-1 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200">
+              <button
+                className="px-2 py-1 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
+                onClick={() => filterByButton("Pending")}
+              >
                 Pending
               </button>
-              <button className="px-2 py-1 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200">
+              <button
+                className="px-2 py-1 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
+                onClick={() => filterByButton("Approved")}
+              >
                 Approved
               </button>
-              <button className="px-2 py-1 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200">
+              <button
+                className="px-2 py-1 rounded-md text-white bg-violet-700 hover:bg-violet-800 transition-colors duration-200"
+                onClick={() => filterByButton("Rejected")}
+              >
                 Rejected
               </button>
             </div>
           </div>
 
           <div className="mt-3">
-            <DataTable columns={columns} data={leaves} pagination />
+            <DataTable columns={columns} data={filteredLeaves} pagination />
           </div>
         </div>
       ) : (
