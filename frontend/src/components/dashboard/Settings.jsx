@@ -35,8 +35,12 @@ const Settings = () => {
           }
         );
         if (response.data.success) {
-          navigate("/employee-dashboard");
           setError("");
+          if (user.role === "admin") {
+            navigate("/admin-dashboard");
+          } else {
+            navigate("/employee-dashboard");
+          }
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {
