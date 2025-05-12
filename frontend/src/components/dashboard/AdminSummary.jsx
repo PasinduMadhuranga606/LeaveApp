@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import SummaryCard from "./SummaryCard";
-import { FaBuilding, FaFile, FaMoneyBillWave, FaUsers } from "react-icons/fa";
+import {
+  FaBuilding,
+  FaCheckSquare,
+  FaFile,
+  FaHourglassHalf,
+  FaTimesCircle,
+  FaUsers,
+} from "react-icons/fa";
 import axios from "axios";
 
 const AdminSummary = () => {
@@ -40,13 +47,13 @@ const AdminSummary = () => {
           icon={<FaUsers />}
           text={"Total Employees"}
           number={summary.totalEmployees}
-          color="bg-gray-600"
+          color="bg-violet-600"
         />
         <SummaryCard
           icon={<FaBuilding />}
           text={"Total Departments"}
           number={summary.totalDepartments}
-          color="bg-gray-600"
+          color="bg-violet-600"
         />
       </div>
 
@@ -57,25 +64,25 @@ const AdminSummary = () => {
             icon={<FaFile />}
             text={"Applied Leaves"}
             number={summary.leaveSummary.appliedFor}
-            color="bg-gray-600"
+            color="bg-blue-600"
           />
           <SummaryCard
-            icon={<FaFile />}
+            icon={<FaCheckSquare />}
             text={"Approved Leaves"}
             number={summary.leaveSummary.approved}
-            color="bg-gray-600"
+            color="bg-green-600"
           />
           <SummaryCard
-            icon={<FaFile />}
+            icon={<FaHourglassHalf />}
             text={"Pending Leaves"}
             number={summary.leaveSummary.pending}
-            color="bg-gray-600"
+            color="bg-yellow-600"
           />
           <SummaryCard
-            icon={<FaFile />}
+            icon={<FaTimesCircle />}
             text={"Rejected Leaves"}
             number={summary.leaveSummary.rejected}
-            color="bg-gray-600"
+            color="bg-red-600"
           />
         </div>
       </div>
