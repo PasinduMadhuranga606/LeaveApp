@@ -56,25 +56,25 @@ const AdminSummary = () => {
           <SummaryCard
             icon={<FaFile />}
             text={"Applied Leaves"}
-            number={0}
+            number={summary.leaveSummary.appliedFor}
             color="bg-gray-600"
           />
           <SummaryCard
             icon={<FaFile />}
             text={"Approved Leaves"}
-            number={0}
+            number={summary.leaveSummary.approved}
             color="bg-gray-600"
           />
           <SummaryCard
             icon={<FaFile />}
             text={"Pending Leaves"}
-            number={0}
+            number={summary.leaveSummary.pending}
             color="bg-gray-600"
           />
           <SummaryCard
             icon={<FaFile />}
             text={"Rejected Leaves"}
-            number={0}
+            number={summary.leaveSummary.rejected}
             color="bg-gray-600"
           />
         </div>
