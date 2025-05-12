@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.get("/", authMiddleware, getLeaves);
 router.post("/add", authMiddleware, addLeave);
-router.get("/:id", authMiddleware, getLeave);
 router.get("/view/:id", authMiddleware, viewLeave);
+router.get("/:id/:role", authMiddleware, getLeave);
 router.put("/:id", authMiddleware, updateLeave);
 //router.delete("/:id", authMiddleware, deleteDepartment);
 
