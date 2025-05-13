@@ -128,13 +128,13 @@ const ViewLeave = () => {
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Start Date:</p>
                 <p className="text-lg font-normal">
-                  {new Date(leave.fromDate).toLocaleDateString()}
+                  {new Date(leave.fromDate).toLocaleDateString("en-GB")}
                 </p>
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">End Date:</p>
                 <p className="text-lg font-normal">
-                  {new Date(leave.toDate).toLocaleDateString()}
+                  {new Date(leave.toDate).toLocaleDateString("en-GB")}
                 </p>
               </div>
               <div className="flex space-x-3 mb-5">
