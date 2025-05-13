@@ -96,7 +96,13 @@ const ViewLeave = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Leave Duration:</p>
-                <p className="text-lg font-normal">{leave.leaveDuration}</p>
+                <p className="text-lg font-normal">
+                  {{
+                    fullDay: "Full Day",
+                    halfDayMorning: "Half Day - Morning",
+                    halfDayAfternoon: "Half Day - Afternoon",
+                  }[leave.leaveDuration] || leave.leaveDuration}
+                </p>
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Description:</p>
