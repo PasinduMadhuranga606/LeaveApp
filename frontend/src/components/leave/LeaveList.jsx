@@ -99,14 +99,14 @@ const LeaveList = () => {
                   }[leave.leaveDuration] || leave.leaveDuration}
                 </td>
                 <td className="px-6 py-3">
-                  {new Date(leave.fromDate).toLocaleDateString()}
+                  {new Date(leave.fromDate).toLocaleDateString("en-GB")}
                 </td>
                 <td className="px-6 py-3">
-                  {new Date(leave.toDate).toLocaleDateString()}
+                  {new Date(leave.toDate).toLocaleDateString("en-GB")}
                 </td>
                 <td className="px-6 py-3">{leave.description}</td>
                 <td className="px-6 py-3">
-                  {new Date(leave.createdAt).toLocaleDateString()}
+                  {new Date(leave.createdAt).toLocaleDateString("en-GB")}
                 </td>
                 <td className="px-6 py-3">{leave.status}</td>
               </tr>
