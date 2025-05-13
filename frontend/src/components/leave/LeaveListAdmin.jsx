@@ -19,7 +19,7 @@ const LeaveListAdmin = () => {
         });
         if (response.data.success) {
           let sno = 1;
-          //console.log(response.data);
+          console.log(response.data);
           const data = await response.data.leaves.map((leave) => ({
             _id: leave._id,
             sno: sno++,

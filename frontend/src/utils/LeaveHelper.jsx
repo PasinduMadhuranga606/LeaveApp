@@ -1,6 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const leaveTypeMap = {
+  sickLeave: "Sick Leave",
+  casualLeave: "Casual Leave",
+  annualLeave: "Annual Leave",
+  lieuLeave: "Lieu Leave",
+};
+
 export const columns = [
   {
     name: "S No",
@@ -20,7 +27,7 @@ export const columns = [
   },
   {
     name: "Leave Type",
-    selector: (row) => row.leaveType,
+    selector: (row) => leaveTypeMap[row.leaveType] || row.leaveType,
     sortable: true,
     width: "130px",
   },
