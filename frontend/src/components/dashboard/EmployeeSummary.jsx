@@ -8,7 +8,7 @@ const EmployeeSummary = () => {
     <div className="p-6">
       <div className="flex items-center w-full shadow-md rounded-lg bg-white p-3 space-x-10">
         <div
-          className={`text-3xl flex justify-center items-center bg-gray-600 text-white rounded-full p-4 px-6`}
+          className={`text-3xl flex justify-center items-center bg-violet-700 text-white rounded-full p-4 px-6`}
         >
           <FaUserTie />
         </div>
