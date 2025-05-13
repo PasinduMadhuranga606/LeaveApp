@@ -84,7 +84,13 @@ const ViewEmployee = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Employment Type:</p>
-                <p className="text-lg font-normal">{employee.employmentType}</p>
+                <p className="text-lg font-normal">
+                  {{
+                    fullTime: "Full-time",
+                    partTime: "Part-time",
+                    contract: "Contract",
+                  }[employee.employmentType] || employee.employmentType}
+                </p>
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Marital Status:</p>
