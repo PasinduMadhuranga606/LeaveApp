@@ -21,7 +21,7 @@ const LeaveList = () => {
             },
           }
         );
-        //console.log(response.data);
+        console.log(response.data);
         if (response.data.success) {
           setLeaves(response.data.leaves);
         }
@@ -83,7 +83,14 @@ const LeaveList = () => {
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
                 <td className="px-6 py-3">{sno++}</td>
-                <td className="px-6 py-3">{leave.leaveType}</td>
+                <td className="px-6 py-3">
+                  {{
+                    sickLeave: "Sick Leave",
+                    casualLeave: "Casual Leave",
+                    annualLeave: "Annual Leave",
+                    lieuLeave: "Lieu Leave",
+                  }[leave.leaveType] || leave.leaveType}
+                </td>
                 <td className="px-6 py-3">{leave.leaveDuration}</td>
                 <td className="px-6 py-3">
                   {new Date(leave.fromDate).toLocaleDateString()}
