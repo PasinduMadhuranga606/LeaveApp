@@ -117,7 +117,12 @@ const ViewLeave = () => {
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Employment Type:</p>
                 <p className="text-lg font-normal">
-                  {leave.employeeId.employmentType}
+                  {{
+                    fullTime: "Full-time",
+                    partTime: "Part-time",
+                    contract: "Contract",
+                  }[leave.employeeId.employmentType] ||
+                    leave.employeeId.employmentType}
                 </p>
               </div>
               <div className="flex space-x-3 mb-5">
