@@ -35,7 +35,7 @@ const EditEmployee = () => {
             },
           }
         );
-        //console.log(response.data);
+        console.log(response.data);
         if (response.data.success) {
           const employee = response.data.employee;
           setEmployee((prev) => ({
@@ -44,7 +44,7 @@ const EditEmployee = () => {
             gender: employee.gender,
             maritalStatus: employee.maritalStatus,
             designation: employee.designation,
-            department: employee.department,
+            department: employee.department._id,
             employmentType: employee.employmentType,
           }));
         }
