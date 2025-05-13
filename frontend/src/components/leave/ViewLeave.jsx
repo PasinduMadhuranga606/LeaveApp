@@ -19,7 +19,7 @@ const ViewLeave = () => {
             },
           }
         );
-        //console.log(response.data);
+        console.log(response.data);
         if (response.data.success) {
           setLeave(response.data.leave);
         }
@@ -85,7 +85,14 @@ const ViewLeave = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Leave Type:</p>
-                <p className="text-lg font-normal">{leave.leaveType}</p>
+                <p className="text-lg font-normal">
+                  {{
+                    sickLeave: "Sick Leave",
+                    casualLeave: "Casual Leave",
+                    annualLeave: "Annual Leave",
+                    lieuLeave: "Lieu Leave",
+                  }[leave.leaveType] || leave.leaveType}
+                </p>
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Leave Duration:</p>
