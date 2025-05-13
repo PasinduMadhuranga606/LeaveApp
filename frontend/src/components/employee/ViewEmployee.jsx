@@ -94,7 +94,12 @@ const ViewEmployee = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Marital Status:</p>
-                <p className="text-lg font-normal">{employee.maritalStatus}</p>
+                <p className="text-lg font-normal">
+                  {{
+                    single: "Single",
+                    married: "Married",
+                  }[employee.maritalStatus] || employee.maritalStatus}
+                </p>
               </div>
             </div>
           </div>
