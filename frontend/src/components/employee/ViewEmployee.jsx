@@ -59,7 +59,7 @@ const ViewEmployee = () => {
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Date of Birth:</p>
                 <p className="text-lg font-normal">
-                  {new Date(employee.dob).toLocaleDateString()}
+                  {new Date(employee.dob).toLocaleDateString("en-GB")}
                 </p>
               </div>
               <div className="flex space-x-3 mb-5">
