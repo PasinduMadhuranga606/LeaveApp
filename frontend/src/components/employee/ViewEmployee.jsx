@@ -64,7 +64,13 @@ const ViewEmployee = () => {
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Gender:</p>
-                <p className="text-lg font-normal">{employee.gender}</p>
+                <p className="text-lg font-normal">
+                  {{
+                    male: "Male",
+                    female: "Female",
+                    other: "Other",
+                  }[employee.gender] || employee.gender}
+                </p>
               </div>
               <div className="flex space-x-3 mb-5">
                 <p className="text-lg font-semibold">Designation:</p>
