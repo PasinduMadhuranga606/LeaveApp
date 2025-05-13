@@ -91,7 +91,13 @@ const LeaveList = () => {
                     lieuLeave: "Lieu Leave",
                   }[leave.leaveType] || leave.leaveType}
                 </td>
-                <td className="px-6 py-3">{leave.leaveDuration}</td>
+                <td className="px-6 py-3">
+                  {{
+                    fullDay: "Full Day",
+                    halfDayMorning: "Half Day - Morning",
+                    halfDayAfternoon: "Half Day - Afternoon",
+                  }[leave.leaveDuration] || leave.leaveDuration}
+                </td>
                 <td className="px-6 py-3">
                   {new Date(leave.fromDate).toLocaleDateString()}
                 </td>
