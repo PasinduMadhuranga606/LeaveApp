@@ -8,6 +8,12 @@ const leaveTypeMap = {
   lieuLeave: "Lieu Leave",
 };
 
+const leaveDurationMap = {
+  fullDay: "Full Day",
+  halfDayMorning: "Half Day - Morning",
+  halfDayAfternoon: "Half Day - Afternoon",
+};
+
 export const columns = [
   {
     name: "S No",
@@ -33,7 +39,7 @@ export const columns = [
   },
   {
     name: "Leave Duration",
-    selector: (row) => row.leaveDuration,
+    selector: (row) => leaveDurationMap[row.leaveDuration] || row.leaveDuration,
     sortable: true,
     width: "160px",
   },
