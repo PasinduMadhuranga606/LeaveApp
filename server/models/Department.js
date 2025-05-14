@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Employee from "./Employee.js";
 import Leave from "./Leave.js";
+import User from "./User.js";
 
 const departmentSchema = new mongoose.Schema({
   dep_name: { type: String, required: true },
@@ -16,9 +17,11 @@ departmentSchema.pre(
     try {
       const employees = await Employee.find({ department: this._id });
       const empIds = employees.map((emp) => emp._id);
+      const empUserIds = employees.map((emp) => emp.userId);
 
       await Employee.deleteMany({ department: this._id });
       await Leave.deleteMany({ employeeId: { $in: empIds } });
+      await User.deleteMany({ _id: { $in: empUserIds } });
       next();
     } catch (error) {
       next(error);
