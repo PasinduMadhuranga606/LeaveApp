@@ -3,6 +3,8 @@ import { useAuth } from "../../context/authContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const apiURL = "http://localhost:5000/api";
+
 const AddLeave = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -11,10 +13,19 @@ const AddLeave = () => {
     userId: user._id,
   });
 
+  const [sampleText, setSampleText] = useState();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLeave((prevState) => ({ ...prevState, [name]: value }));
   };
+
+  const handleChangeSample = (e) => {
+    const { name, value } = e.target;
+    setSampleText((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  // const responseMain = async () => "http://localhost:5000/api/leave";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,8 +37,9 @@ const AddLeave = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/leave/add",
+        apiURL + "/leave/add",
         leave,
+        sampleText,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -139,6 +151,21 @@ const AddLeave = () => {
             className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
             rows="4"
           ></textarea>
+        </div>
+
+        <div className="mt-4">
+          <label
+            //htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Sample Text
+          </label>
+          <input
+            name="sampleText"
+            onChange={handleChangeSample}
+            placeholder="Sample Text"
+            className="mt-1 w-full p-2 block border border-gray-300 rounded-md"
+          ></input>
         </div>
 
         <button
